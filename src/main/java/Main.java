@@ -17,8 +17,13 @@ public class Main {
         System.out.println(availableCars(cars));
 
         Car car4 = new Car("BMW", 004, 600, false);
-        .m=nameOfMethod()
-        cars = cars.add
+        CarRentalDB.addCar(cars, car4);
+        System.out.println(cars);
+
+        Car car5 = new Car("Honda", 005, 300, false);
+        CarRentalDB.addCar(cars, car5);
+        System.out.println(cars);
+
     }
 
     public static ArrayList<Car> rentedCars(ArrayList<Car> cars) {
