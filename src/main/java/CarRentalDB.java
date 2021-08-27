@@ -47,6 +47,13 @@ public class CarRentalDB {
             cars.remove(car);
         }
     }
+//    public static void bookCar(ArrayList<Car> cars, Car car, int rentCar){
+//        for(Car c: cars) {
+//            if (rentCar == car.getId()) {
+//
+//            }
+//        }
+//    }
 }
 
 
