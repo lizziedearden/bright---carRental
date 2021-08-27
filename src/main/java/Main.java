@@ -20,8 +20,11 @@ public class Main {
         CarRentalDB.addCar(cars, car4);
         System.out.println(cars);
 
-        Car car5 = new Car("Honda", 005, 300, false);
+        Car car5 = new Car("Honda", 005, 300, true);
         CarRentalDB.addCar(cars, car5);
+        System.out.println(cars);
+
+        CarRentalDB.removeCar(cars, car5);
         System.out.println(cars);
 
     }

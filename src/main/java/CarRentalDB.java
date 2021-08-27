@@ -40,6 +40,13 @@ public class CarRentalDB {
     public static void addCar(ArrayList<Car> cars, Car car) {
         cars.add(car);
     }
+    public static void removeCar(ArrayList<Car> cars, Car car){
+        if(car.isRented()==true){
+            throw new IllegalArgumentException("This car is rented out so cannot be removed from the list!");
+        } else {
+            cars.remove(car);
+        }
+    }
 }
 
 
