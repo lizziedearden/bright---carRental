@@ -36,14 +36,28 @@ public class CarRentalDB {
                 "cars=" + cars +
                 '}';
     }
-    public static void addCar (ArrayList<Car> cars, Car car){
+
+    public static void addCar(ArrayList<Car> cars, Car car) {
         cars.add(car);
     }
-    public static void removeCar (ArrayList<Car> cars, Car car) {
-        if ()
+    public static void removeCar(ArrayList<Car> cars, Car car){
+        if(car.isRented()==true){
+            throw new IllegalArgumentException("This car is rented out so cannot be removed from the list!");
+        } else {
+            cars.remove(car);
+        }
     }
-
+//    public static void bookCar(ArrayList<Car> cars, Car car, int rentCar){
+//        for(Car c: cars) {
+//            if (rentCar == car.getId()) {
+//
+//            }
+//        }
+//    }
 }
+
+
+
 //Add methods for returning a car-switch the boolean type to true
 //ternary
 //set the boolean to not current value
