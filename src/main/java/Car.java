@@ -2,13 +2,15 @@ import java.util.Objects;
 
 public class Car {
     private String make;
-    private Long id;
-    private int rentalPrice;
+    private int id;
+    private double rentalPrice;
+    private boolean rented;
 
-    public Car(String make, Long id, int rentalPrice) {
+    public Car(String make, int id, double rentalPrice, boolean rented) {
         this.make = make;
         this.id = id;
         this.rentalPrice = rentalPrice;
+        this.rented = rented;
     }
 
     public String getMake() {
@@ -19,20 +21,28 @@ public class Car {
         this.make = make;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getRentalPrice() {
+    public double getRentalPrice() {
         return rentalPrice;
     }
 
-    public void setRentalPrice(int rentalPrice) {
+    public void setRentalPrice(double rentalPrice) {
         this.rentalPrice = rentalPrice;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     @Override
@@ -40,12 +50,12 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return rentalPrice == car.rentalPrice && make.equals(car.make) && id.equals(car.id);
+        return Double.compare(car.rentalPrice, rentalPrice) == 0 && rented == car.rented && Objects.equals(make, car.make) && Objects.equals(id, car.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(make, id, rentalPrice);
+        return Objects.hash(make, id, rentalPrice, rented);
     }
 
     @Override
@@ -54,6 +64,7 @@ public class Car {
                 "make='" + make + '\'' +
                 ", id=" + id +
                 ", rentalPrice=" + rentalPrice +
+                ", rented=" + rented +
                 '}';
     }
 }
