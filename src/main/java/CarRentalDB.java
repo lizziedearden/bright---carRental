@@ -1,7 +1,47 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CarRentalDB {
     private List<Car> cars;
+
+    public CarRentalDB(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarRentalDB that = (CarRentalDB) o;
+        return Objects.equals(cars, that.cars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cars);
+    }
+
+    @Override
+    public String toString() {
+        return "CarRentalDB{" +
+                "cars=" + cars +
+                '}';
+    }
+    public static void addCar (ArrayList<Car> cars, Car car){
+        cars.add(car);
+    }
+    public static void removeCar (ArrayList<Car> cars, Car car) {
+        if ()
+    }
 
 }
 //Add methods for returning a car-switch the boolean type to true
@@ -16,8 +56,7 @@ public class CarRentalDB {
 //CAR MANAGEMENT
 //- The user should be able to add new cars including daily price for renting
 //- The user should be able to remove cars if not being rented
-//- The user should be able to list available cars for rent main
-//- The user should be able to list rented cars main
+
 //
 //RENTAL
 //- The user should be able to book a car
