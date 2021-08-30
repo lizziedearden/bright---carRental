@@ -40,20 +40,46 @@ public class CarRentalDB {
     public static void addCar(ArrayList<Car> cars, Car car) {
         cars.add(car);
     }
-    public static void removeCar(ArrayList<Car> cars, Car car){
-        if(car.isRented()==true){
-            throw new IllegalArgumentException("This car is rented out so cannot be removed from the list!");
-        } else {
-            cars.remove(car);
+
+    public static void removeCar(ArrayList<Car> cars, int removeCarId) {
+        for (Car c : cars) {
+            if (removeCarId == c.getId()) {
+                cars.remove(c);
+                System.out.println("The car with the id " + c.getId() + " has been removed.");
+            } else if (c.isRented()) {
+                throw new IllegalArgumentException("This car is rented out so cannot be removed from the list!");
+            } else {
+                throw new IllegalArgumentException("This car does not exist!");
+            }
         }
     }
-//    public static void bookCar(ArrayList<Car> cars, Car car, int rentCar){
-//        for(Car c: cars) {
-//            if (rentCar == car.getId()) {
-//
-//            }
-//        }
-//    }
+
+    public static void bookCar(ArrayList<Car> cars, int rentCar) {
+        try {
+            for (Car c : cars) {
+                if (rentCar == c.getId()) {
+                    c.setRented(true);
+                    System.out.println("You have rented a car: ID = " + rentCar);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("The car ID you gave us does not exist!");
+        }
+    }
+
+    public static void returnCar(ArrayList<Car> cars, int returnCar) {
+        try {
+            for (Car c : cars) {
+                if (returnCar == c.getId()) {
+                    c.setRented(false);
+                    System.out.println("You have returned a car: ID = " + returnCar);
+
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("A car with that Id does not exist.");
+        }
+    }
 }
 
 
