@@ -17,56 +17,65 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you a manager or a customer? m/c");
         String managerCustomer = scanner.nextLine().toLowerCase();
-        if(managerCustomer.equals("m")){
-            System.out.println("Would you like to: \n (a)See list of cars \n (b)See list of rented cars \n (c)See list of available cars \n (d)Add a car \n (e)Remove a car \n Select a/b/c/d/e");
-            String managerAnswer = scanner.nextLine().toLowerCase();
-            switch (managerAnswer) {
-                case "a" -> System.out.println(cars);
-                case "b" -> System.out.println(rentedCars(cars));
-                case "c" -> System.out.println(availableCars(cars));
-                case "d" -> {
-                    System.out.println("What car would you like to add?");
-                    System.out.println("Make?");
-                    String newCarModel = scanner.nextLine();
-                    System.out.println("ID? Give the car a three digit ID");
-                    String newCarStringID = scanner.nextLine();
-                    int newCarID = Integer.parseInt(newCarStringID);
-                    System.out.println("Rental Price?");
-                    String newCarStringPrice = scanner.nextLine();
-                    double newCarPrice = Double.parseDouble(newCarStringPrice);
-                    Car newCar = new Car(newCarModel, newCarID, newCarPrice, false);
-                    CarRentalDB.addCar(cars, newCar);
-                    System.out.println(cars);
+        boolean customerLoop = true;
+        while(customerLoop) {
+            if (managerCustomer.equals("m")) {
+                System.out.println("Would you like to: \n (a)See list of cars \n (b)See list of rented cars \n (c)See list of available cars \n (d)Add a car \n (e)Remove a car \n (f)Exit \n Select a/b/c/d/e/f");
+                String managerAnswer = scanner.nextLine().toLowerCase();
+                switch (managerAnswer) {
+                    case "a" -> System.out.println(cars);
+                    case "b" -> System.out.println(rentedCars(cars));
+                    case "c" -> System.out.println(availableCars(cars));
+                    case "d" -> {
+                        System.out.println("What car would you like to add?");
+                        System.out.println("Make?");
+                        String newCarModel = scanner.nextLine();
+                        System.out.println("ID? Give the car a three digit ID");
+                        String newCarStringID = scanner.nextLine();
+                        int newCarID = Integer.parseInt(newCarStringID);
+                        System.out.println("Rental Price?");
+                        String newCarStringPrice = scanner.nextLine();
+                        double newCarPrice = Double.parseDouble(newCarStringPrice);
+                        Car newCar = new Car(newCarModel, newCarID, newCarPrice, false);
+                        CarRentalDB.addCar(cars, newCar);
+                        System.out.println(cars);
+                    }
+                    case "e" -> {
+                        System.out.println(availableCars(cars));
+                        System.out.println("What car would you like to remove?");
+                        String removeCarStringId = scanner.nextLine();
+                        int removeCarId = Integer.parseInt(removeCarStringId);
+                        CarRentalDB.removeCar(cars, removeCarId);
+                    }
+                    case "f" -> {
+                        customerLoop = false;
+                    }
+                    default -> System.out.println("Input invalid");
                 }
-                case "e" -> {
-                    System.out.println(availableCars(cars));
-                    System.out.println("What car would you like to remove?");
-                    String removeCarStringId = scanner.nextLine();
-                    int removeCarId = Integer.parseInt(removeCarStringId);
-                    CarRentalDB.removeCar(cars, removeCarId);
+            } else if (managerCustomer.equals("c")) {
+                System.out.println("Would you like to: \n (a)Book a car \n (b)Return a car \n (c)Exit \n Select a or b or c");
+                String customerAnswer = scanner.nextLine().toLowerCase();
+                switch (customerAnswer) {
+                    case "a" -> {
+                        System.out.println("Here is the list of available cars: \n " + availableCars(cars) + "Which car would you like to rent? Just give the ID number");
+                        String stringRentCar = scanner.nextLine();
+                        int rentCar = Integer.parseInt(stringRentCar);
+                        CarRentalDB.bookCar(cars, rentCar);
+                    }
+                    case "b" -> {
+                        System.out.println("Here is the list of rented cars: \n" + rentedCars(cars) + "Give the id of the car you would like to return:");
+                        String stringReturnCar = scanner.nextLine();
+                        int returnCar = Integer.parseInt(stringReturnCar);
+                        CarRentalDB.returnCar(cars, returnCar);
+                    }
+                    case "c" -> {
+                        customerLoop = false;
+                    }
+                    default -> System.out.println("Invalid input!");
                 }
-                default -> System.out.println("Input invalid");
+            } else {
+                System.out.println("Your input was invalid!");
             }
-        } else if(managerCustomer.equals("c")){
-            System.out.println("Would you like to: \n (a)Book a car \n (b)Return a car \n Select a or b");
-            String customerAnswer = scanner.nextLine().toLowerCase();
-            switch (customerAnswer) {
-                case "a" -> {
-                    System.out.println("Here is the list of available cars: \n " + availableCars(cars) + "Which car would you like to rent? Just give the ID number");
-                    String stringRentCar = scanner.nextLine();
-                    int rentCar = Integer.parseInt(stringRentCar);
-                    CarRentalDB.bookCar(cars, rentCar);
-                }
-                case "b" -> {
-                    System.out.println("Here is the list of rented cars: \n" + rentedCars(cars) + "Give the id of the car you would like to return:");
-                    String stringReturnCar = scanner.nextLine();
-                    int returnCar = Integer.parseInt(stringReturnCar);
-                    CarRentalDB.returnCar(cars, returnCar);
-                }
-                default -> System.out.println("Invalid input!");
-            }
-        } else {
-            System.out.println("Your input was invalid!");
         }
     }
 
