@@ -37,11 +37,11 @@ public class CarRentalDB {
                 '}';
     }
 
-    public static void addCar(ArrayList<Car> cars, Car car) {
+    public void addCar(ArrayList<Car> cars, Car car) {
         cars.add(car);
     }
 
-    public static void removeCar(ArrayList<Car> cars, int removeCarId) {
+    public void removeCar(ArrayList<Car> cars, int removeCarId) {
         for (Car c : cars) {
             if (removeCarId == c.getId() && c.isRented() == false) {
                 cars.remove(c);
@@ -55,7 +55,7 @@ public class CarRentalDB {
         }
     }
 
-    public static void bookCar(ArrayList<Car> cars, int rentCar) {
+    public void bookCar(ArrayList<Car> cars, int rentCar) {
         try {
             for (Car c : cars) {
                 if (rentCar == c.getId()) {
@@ -68,7 +68,7 @@ public class CarRentalDB {
         }
     }
 
-    public static void returnCar(ArrayList<Car> cars, int returnCar) {
+    public void returnCar(ArrayList<Car> cars, int returnCar) {
         try {
             for (Car c : cars) {
                 if (returnCar == c.getId()) {

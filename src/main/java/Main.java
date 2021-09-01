@@ -1,16 +1,19 @@
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] arguments) {
-
-
-
-
-//        CarRentalDB carRentalDB = new CarRentalDB();
+    public static void main(String[] arguments) throws IOException {
+        File carSelection = new File("src/main/java/carSelection.txt");
+        if (carSelection.createNewFile()){
+            System.out.println("File is created");
+        } else {
+            System.out.println("File already exists.");
+        }
 
         Car car1 = new Car("Tesla", 1, 500, true);
         Car car2 = new Car("Ferrari", 2, 700, false);
@@ -20,6 +23,9 @@ public class Main {
         cars.add(car1);
         cars.add(car2);
         cars.add(car3);
+        CarRentalDB carRentalDB = new CarRentalDB(cars);
+
+        FileWriter writer = new FileWriter(carSelection);
 
 
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +51,7 @@ public class Main {
                         String newCarStringPrice = scanner.nextLine();
                         double newCarPrice = Double.parseDouble(newCarStringPrice);
                         Car newCar = new Car(newCarModel, newCarID, newCarPrice, false);
-                        CarRentalDB.addCar(cars, newCar);
+                        carRentalDB.addCar(cars, newCar);
                         System.out.println(cars);
                     }
                     case "e" -> {
@@ -53,7 +59,7 @@ public class Main {
                         System.out.println("What car would you like to remove?");
                         String removeCarStringId = scanner.nextLine();
                         int removeCarId = Integer.parseInt(removeCarStringId);
-                        CarRentalDB.removeCar(cars, removeCarId);
+                        carRentalDB.removeCar(cars, removeCarId);
                     }
                     case "f" -> {
                         customerLoop = false;
@@ -68,13 +74,13 @@ public class Main {
                         System.out.println("Here is the list of available cars: \n " + availableCars(cars) + "Which car would you like to rent? Just give the ID number");
                         String stringRentCar = scanner.nextLine();
                         int rentCar = Integer.parseInt(stringRentCar);
-                        CarRentalDB.bookCar(cars, rentCar);
+                        carRentalDB.bookCar(cars, rentCar);
                     }
                     case "b" -> {
                         System.out.println("Here is the list of rented cars: \n" + rentedCars(cars) + "Give the id of the car you would like to return:");
                         String stringReturnCar = scanner.nextLine();
                         int returnCar = Integer.parseInt(stringReturnCar);
-                        CarRentalDB.returnCar(cars, returnCar);
+                        carRentalDB.returnCar(cars, returnCar);
                     }
                     case "c" -> {
                         customerLoop = false;
@@ -85,6 +91,8 @@ public class Main {
                 System.out.println("Your input was invalid!");
             }
         }
+        writer.write(String.valueOf(cars));
+        writer.close();
     }
 
     public static ArrayList<Car> rentedCars(ArrayList<Car> cars) {
