@@ -1,0 +1,1 @@
+[Car{make='Tesla', id=1, rentalPrice=500.0, rented=true}, Car{make='Ferrari', id=2, rentalPrice=700.0, rented=false}, Car{make='Mercedes', id=3, rentalPrice=400.0, rented=false}]
