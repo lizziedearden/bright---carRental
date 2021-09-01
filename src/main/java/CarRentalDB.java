@@ -43,14 +43,15 @@ public class CarRentalDB {
 
     public static void removeCar(ArrayList<Car> cars, int removeCarId) {
         for (Car c : cars) {
-            if (removeCarId == c.getId()) {
+            if (removeCarId == c.getId() && c.isRented() == false) {
                 cars.remove(c);
                 System.out.println("The car with the id " + c.getId() + " has been removed.");
-            } else if (c.isRented()) {
+            } else if (removeCarId == c.getId() && c.isRented() == true) {
                 throw new IllegalArgumentException("This car is rented out so cannot be removed from the list!");
-            } else {
-                throw new IllegalArgumentException("This car does not exist!");
             }
+//            else {
+//                throw new IllegalArgumentException("This car does not exist!");
+//            }
         }
     }
 

@@ -1,10 +1,17 @@
 
+import java.io.File;
 import java.util.ArrayList;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] arguments) {
+
+
+
+
+//        CarRentalDB carRentalDB = new CarRentalDB();
+
         Car car1 = new Car("Tesla", 1, 500, true);
         Car car2 = new Car("Ferrari", 2, 700, false);
         Car car3 = new Car("Mercedes", 3, 400, false);
@@ -13,6 +20,7 @@ public class Main {
         cars.add(car1);
         cars.add(car2);
         cars.add(car3);
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you a manager or a customer? m/c");
@@ -30,7 +38,7 @@ public class Main {
                         System.out.println("What car would you like to add?");
                         System.out.println("Make?");
                         String newCarModel = scanner.nextLine();
-                        System.out.println("ID? Give the car a three digit ID");
+                        System.out.println("ID? Give the car an ID number:");
                         String newCarStringID = scanner.nextLine();
                         int newCarID = Integer.parseInt(newCarStringID);
                         System.out.println("Rental Price?");
