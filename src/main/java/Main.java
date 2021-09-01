@@ -12,7 +12,7 @@ public class Main {
         if (carSelection.createNewFile()){
             System.out.println("File is created");
         } else {
-            System.out.println("File already exists.");
+            System.out.println("Overwrite File");
         }
 
         Car car1 = new Car("Tesla", 1, 500, true);
@@ -24,9 +24,7 @@ public class Main {
         cars.add(car2);
         cars.add(car3);
         CarRentalDB carRentalDB = new CarRentalDB(cars);
-
         FileWriter writer = new FileWriter(carSelection);
-
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you a manager or a customer? m/c");
@@ -71,13 +69,13 @@ public class Main {
                 String customerAnswer = scanner.nextLine().toLowerCase();
                 switch (customerAnswer) {
                     case "a" -> {
-                        System.out.println("Here is the list of available cars: \n " + availableCars(cars) + "Which car would you like to rent? Just give the ID number");
+                        System.out.println("Here is the list of available cars: \n " + availableCars(cars) + "\n Which car would you like to rent? Just give the ID number");
                         String stringRentCar = scanner.nextLine();
                         int rentCar = Integer.parseInt(stringRentCar);
                         carRentalDB.bookCar(cars, rentCar);
                     }
                     case "b" -> {
-                        System.out.println("Here is the list of rented cars: \n" + rentedCars(cars) + "Give the id of the car you would like to return:");
+                        System.out.println("Here is the list of rented cars: \n" + rentedCars(cars) + "\n Give the id of the car you would like to return:");
                         String stringReturnCar = scanner.nextLine();
                         int returnCar = Integer.parseInt(stringReturnCar);
                         carRentalDB.returnCar(cars, returnCar);
